@@ -16,12 +16,45 @@ using System.IO;
 
 namespace alfaNET.Common.Storage
 {
+    /// <summary>
+    /// A contract for accessing the file system. This is useful especially for unit testing but it can prove more uses.
+    /// </summary>
     public interface IFileSystem
     {
+        /// <summary>
+        /// Gets the last time of writing to a file
+        /// </summary>
+        /// <param name="fullPath">The full path to the file. This may not be null or empty.</param>
+        /// <returns>The time of the last write to the file.</returns>
         DateTime GetFileLastWriteTime(string fullPath);
+
+        /// <summary>
+        /// Opens a file for reading
+        /// </summary>
+        /// <param name="fullPath">The full path to the file. This may not be null or empty.</param>
+        /// <returns>An open stream, positioned at the beginning</returns>
         Stream OpenFileForReading(string fullPath);
+
+        /// <summary>
+        /// Creates a new file
+        /// </summary>
+        /// <param name="fullPath">The full path to the file. This may not be null or empty.</param>
+        /// <returns>An empty stream pointing to the file.</returns>
+        /// <remarks>If the file already exists it will be overwritten.</remarks>
         Stream CreateFile(string fullPath);
+
+        /// <summary>
+        /// Checks where a certain file does *NOT* exist. Useful for negative checks, as "!" is less readable.
+        /// </summary>
+        /// <param name="fullPath">The full path to the file. This may not be null or empty.</param>
+        /// <returns>true if the file does not exist, false if it exists</returns>
         bool FileDoesNotExist(string fullPath);
+
+        /// <summary>
+        /// Gets the actual size in bytes of the file.
+        /// </summary>
+        /// <param name="fullPath">The full path to the file. This may not be null or empty.</param>
+        /// <returns>The actual size in bytes of the file</returns>
         long GetFileSize(string fullPath);
     }
 }

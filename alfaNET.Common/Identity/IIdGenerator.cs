@@ -15,8 +15,15 @@ using System;
 
 namespace alfaNET.Common.Identity
 {
+    /// <summary>
+    /// A contract for generating identificators. Useful also for mocking and verifying id generation.
+    /// </summary>
     public interface IIdGenerator
     {
+        /// <summary>
+        /// Generates a new GUID
+        /// </summary>
+        /// <returns>A new GUID</returns>
         Guid GenerateGuid();
     }
 }

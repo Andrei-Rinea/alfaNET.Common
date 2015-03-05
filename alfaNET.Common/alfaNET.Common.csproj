@@ -42,9 +42,9 @@
     <None Include="alfaNET.Common.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concurrency\ILockContext.cs" />
-    <Compile Include="Concurrency\ILockContextFactory.cs" />
-    <Compile Include="Concurrency\LockContextType.cs" />
+    <Compile Include="Concurrency\IReaderWriterLockContext.cs" />
+    <Compile Include="Concurrency\IReaderWriterLockContextFactory.cs" />
+    <Compile Include="Concurrency\ReaderWriterLockContextType.cs" />
     <Compile Include="Data\CollectionHelper.cs" />
     <Compile Include="Data\EqualityComparerPredicate.cs" />
     <Compile Include="Data\SafeConvert.cs" />
@@ -59,13 +59,16 @@
     <Compile Include="Security\IAuthenticator.cs" />
     <Compile Include="Security\IHasher.cs" />
     <Compile Include="Security\SimpleAuthenticator.cs" />
-    <Compile Include="Storage\Exceptions\DataException.cs" />
-    <Compile Include="Storage\Exceptions\DuplicateEntityException.cs" />
-    <Compile Include="Storage\Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Storage\Exceptions\DataAccessException.cs" />
+    <Compile Include="Storage\Exceptions\DuplicateEntityAccessException.cs" />
+    <Compile Include="Storage\Exceptions\EntityNotFoundAccessException.cs" />
     <Compile Include="Storage\IFileSystem.cs" />
     <Compile Include="Time\ITimeService.cs" />
     <Compile Include="Time\TimeServiceAdapter.cs" />
     <Compile Include="Validation\ExceptionUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ChangeLog.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

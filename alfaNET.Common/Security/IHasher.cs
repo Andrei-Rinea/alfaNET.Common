@@ -15,9 +15,22 @@ using System.Text;
 
 namespace alfaNET.Common.Security
 {
+    /// <summary>
+    /// A contract for hashing data
+    /// </summary>
     public interface IHasher
     {
+        /// <summary>
+        /// Hashes a string by converting it to its binary representation, based on the <see cref="Encoding"/>, and then hashing the resulting bytes using the algorithm.
+        /// </summary>
+        /// <param name="data">The actual string to be hashed.</param>
+        /// <param name="salt">The salt (entropy) data to be used in the process.</param>
+        /// <returns>A base64 representation of the hashed data.</returns>
         string Hash(string data, string salt);
+
+        /// <summary>
+        /// The <see cref="Encoding"/> used for converting the string data to its binary representation and vice-versa
+        /// </summary>
         Encoding Encoding { get; }
     }
 }

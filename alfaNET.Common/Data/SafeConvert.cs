@@ -15,10 +15,21 @@ using System;
 
 namespace alfaNET.Common.Data
 {
+    /// <summary>
+    /// Helper class for safe converting data. That is, if input data is invalid an empty result will be returned rather than throwing an exception
+    /// </summary>
     public static class SafeConvert
     {
+        /// <summary>
+        /// Conversion error result for byte arrays return-based methods
+        /// </summary>
         public static readonly byte[] ConvertError = { };
 
+        /// <summary>
+        /// Converts a base64 string to its byte array representation
+        /// </summary>
+        /// <param name="value">The base64 string</param>
+        /// <returns>The byte array representation or an empty byte array result (reference-wise equal to ConvertError).</returns>
         public static byte[] FromBase64String(string value)
         {
             if (string.IsNullOrWhiteSpace(value)) return ConvertError;

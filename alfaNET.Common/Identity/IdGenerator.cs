@@ -15,8 +15,15 @@ using System;
 
 namespace alfaNET.Common.Identity
 {
+    /// <summary>
+    /// Simple Id generator.
+    /// </summary>
     public class IdGenerator : IIdGenerator
     {
+        /// <summary>
+        /// Generates a new GUID
+        /// </summary>
+        /// <returns>A new GUID</returns>
         public Guid GenerateGuid()
         {
             return Guid.NewGuid();

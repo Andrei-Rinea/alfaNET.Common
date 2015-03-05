@@ -13,10 +13,24 @@
 // limitations under the License.
 namespace alfaNET.Common.Concurrency
 {
-    public enum LockContextType
+    /// <summary>
+    /// Describes the ReaderWriterLockContext type. Reader or Writer.
+    /// </summary>
+    public enum ReaderWriterLockContextType
     {
+        /// <summary>
+        /// Undefined value, used to prevent accidental initialization.
+        /// </summary>
         Undefined,
-        Read,
-        Write
+
+        /// <summary>
+        /// Reader context. This allows many simultaneous readers.
+        /// </summary>
+        Reader,
+
+        /// <summary>
+        /// Writer context. This allows at most one writer.
+        /// </summary>
+        Writer
     }
 }

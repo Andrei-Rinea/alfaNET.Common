@@ -15,7 +15,6 @@ using System;
 using System.IO;
 using alfaNET.Common.Data;
 using alfaNET.Common.Logging;
-using alfaNET.Common.NetFx.Security;
 using alfaNET.Common.Security;
 using NSubstitute;
 using Xunit;
@@ -28,7 +27,7 @@ namespace alfaNET.Common.NetFx.Tests.Security
         private readonly IHasher _hasher;
         private readonly ILogger _logger;
         private readonly Func<Stream> _configStreamFunc;
-        private readonly SimpleFileAuthenticator _dummyAuthenticator;
+        private readonly SimpleAuthenticator _dummyAuthenticator;
 
         private const string Username = "Username";
         private const string Password = "Password";
@@ -48,25 +47,25 @@ namespace alfaNET.Common.NetFx.Tests.Security
             _hasher = Substitute.For<IHasher>();
             _logger = Substitute.For<ILogger>();
             _configStreamFunc = () => null;
-            _dummyAuthenticator = new SimpleFileAuthenticator(_hasher, _configStreamFunc, _logger);
+            _dummyAuthenticator = new SimpleAuthenticator(_hasher, _configStreamFunc, _logger);
         }
 
         [Fact]
         public void Constructor_RejectsNullHasher()
         {
-            Assert.Throws<ArgumentNullException>(() => new SimpleFileAuthenticator(null, _configStreamFunc, _logger));
+            Assert.Throws<ArgumentNullException>(() => new SimpleAuthenticator(null, _configStreamFunc, _logger));
         }
 
         [Fact]
         public void Constructor_RejectsNullConfigStreamFunc()
         {
-            Assert.Throws<ArgumentNullException>(() => new SimpleFileAuthenticator(_hasher, null, _logger));
+            Assert.Throws<ArgumentNullException>(() => new SimpleAuthenticator(_hasher, null, _logger));
         }
 
         [Fact]
         public void Constructor_RejectsLogger()
         {
-            Assert.Throws<ArgumentNullException>(() => new SimpleFileAuthenticator(_hasher, _configStreamFunc, null));
+            Assert.Throws<ArgumentNullException>(() => new SimpleAuthenticator(_hasher, _configStreamFunc, null));
         }
 
         [Theory]
@@ -82,7 +81,7 @@ namespace alfaNET.Common.NetFx.Tests.Security
 
         private AuthenticationResult GetAuthResult(string username, string password)
         {
-            var systemUnderTest = new SimpleFileAuthenticator(_hasher, () => Config1.ToStream(), _logger);
+            var systemUnderTest = new SimpleAuthenticator(_hasher, () => Config1.ToStream(), _logger);
             return systemUnderTest.Authenticate(username, password);
         }
 

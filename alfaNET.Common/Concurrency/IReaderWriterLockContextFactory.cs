@@ -15,8 +15,16 @@ using System;
 
 namespace alfaNET.Common.Concurrency
 {
-    public interface ILockContext : IDisposable
+    /// <summary>
+    /// Contract for creating ReaderWriterLockContexts
+    /// </summary>
+    public interface IReaderWriterLockContextFactory : IDisposable
     {
-        LockContextType Type { get; }
+        /// <summary>
+        /// Creates a new ReaderWriterLockContext
+        /// </summary>
+        /// <param name="type">ReaderWriterLockContext type; Reader</param>
+        /// <returns></returns>
+        IReaderWriterLockContext CreateReaderWriterLockContext(ReaderWriterLockContextType type);
     }
 }

@@ -48,7 +48,6 @@
     <Compile Include="Concurrency\LockContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Sha512Hasher.cs" />
-    <Compile Include="Security\SimpleFileAuthenticator.cs" />
     <Compile Include="Storage\FileSystemAdapter.cs" />
   </ItemGroup>
   <ItemGroup>

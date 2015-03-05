@@ -19,8 +19,19 @@ using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.Data
 {
+    /// <summary>
+    /// Helper class for collections.
+    /// </summary>
     public static class CollectionHelper
     {
+        /// <summary>
+        /// Gets a list of duplicates in a collection.
+        /// </summary>
+        /// <typeparam name="TEntry">The type of the collection's items</typeparam>
+        /// <param name="entries">The collection. Null is not allowed but empty collection is allowed.</param>
+        /// <param name="comparerPredicate">The predicate for comparing items. This is used to detect if two separate items are 'equal' or not.</param>
+        /// <returns>An enumerable of all duplicates and their respective indices in the collection. Even if there are no duplicates null will not be returned but rather an empty enumerable will be returned.</returns>
+        /// <exception cref="ArgumentNullException">entries is null or comparerPredicate is null</exception>
         public static IEnumerable<Tuple<int, TEntry>> GetDuplicates<TEntry>(IList<TEntry> entries, EqualityComparerPredicate<TEntry> comparerPredicate)
         {
             ExceptionUtil.ThrowIfNull(entries, "entries");

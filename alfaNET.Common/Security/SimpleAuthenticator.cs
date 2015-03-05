@@ -23,9 +23,12 @@ using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.Security
 {
-    public class SimpleAuthenticator
+    /// <summary>
+    /// A simple implementation for XML-based authentication stores.
+    /// </summary>
+    public class SimpleAuthenticator : IAuthenticator
     {
-         private class UserEntry
+        private class UserEntry
         {
             public UserEntry(string name, string salt, string hashBase64, string role)
             {
@@ -64,6 +67,14 @@ namespace alfaNET.Common.Security
 
         private UserEntry[] _userEntries;
 
+        /// <summary>
+        /// Constructs a new instance of <see cref="SimpleAuthenticator"/>.
+        /// </summary>
+        /// <param name="hasher">The hasher instance for hashing passwords. This may not be null.</param>
+        /// <param name="configStreamFunc">The <see cref="Func{Stream}"/> used to produce the configuration stream. In future, in order to support automatic reloading, a simple <see cref="Stream"/> could not be used. This may not be null. Nor should it produce nulls.</param>
+        /// <param name="logger">A logger used to signal certain configuration issues. This may not be null.</param>
+        /// <param name="usernameFinder">A matcher used for authenticating users. This could take into account culture and/or casing. This may be null, in which case  a current culture / case ignoring comparator is used.</param>
+        /// <exception cref="ArgumentNullException">In case hasher, configStreamFunc or logger is null.</exception>
         public SimpleAuthenticator(
             IHasher hasher,
             Func<Stream> configStreamFunc,
@@ -147,6 +158,13 @@ namespace alfaNET.Common.Security
                 userEntries.Add(userEntry);
         }
 
+        /// <summary>
+        /// Requests to authenticate a user.
+        /// </summary>
+        /// <param name="username">The username. This may not be null or empty.</param>
+        /// <param name="password">The password. This may not be null or empty.</param>
+        /// <returns>An <see cref="AuthenticationResult"/> describing the result of the authentication request.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">In case username or password is/are null or empty.</exception>
         public AuthenticationResult Authenticate(string username, string password)
         {
             ExceptionUtil.ThrowIfNullOrEmpty(username, "username");

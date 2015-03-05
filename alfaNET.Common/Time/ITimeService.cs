@@ -15,8 +15,14 @@ using System;
 
 namespace alfaNET.Common.Time
 {
+    /// <summary>
+    /// A contract for reading the real-time clock of the device
+    /// </summary>
     public interface ITimeService
     {
+        /// <summary>
+        /// The UTC 'now' time.
+        /// </summary>
         DateTimeOffset UtcNow { get; }
     }
 }

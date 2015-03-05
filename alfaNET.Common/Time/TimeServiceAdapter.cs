@@ -15,8 +15,14 @@ using System;
 
 namespace alfaNET.Common.Time
 {
+    /// <summary>
+    /// A simple time service adapter
+    /// </summary>
     public class TimeServiceAdapter : ITimeService
     {
+        /// <summary>
+        /// The UTC 'now' time.
+        /// </summary>
         public DateTimeOffset UtcNow { get { return DateTime.UtcNow; } }
     }
 }

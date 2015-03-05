@@ -13,8 +13,17 @@
 // limitations under the License.
 namespace alfaNET.Common.Security
 {
+    /// <summary>
+    /// A contract for authenticating users
+    /// </summary>
     public interface IAuthenticator
     {
+        /// <summary>
+        /// Requests to authenticate a user.
+        /// </summary>
+        /// <param name="username">The username</param>
+        /// <param name="password">The password</param>
+        /// <returns>An <see cref="AuthenticationResult"/> describing the result of the authentication request.</returns>
         AuthenticationResult Authenticate(string username, string password);
     }
 }

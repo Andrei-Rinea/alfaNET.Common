@@ -83,12 +83,16 @@ namespace alfaNET.Common.Tests.Validation
             Assert.DoesNotThrow(() => ExceptionUtil.ThrowIfNullOrWhitespace(NonEmptyText, parameterName));
         }
 
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        public void ThrowIfNullOrEmpty_ThrowsIfSo(string @string)
+        [Fact]
+        public void ThrowIfNullOrEmpty_ThrowsIfNull()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => ExceptionUtil.ThrowIfNullOrEmpty(@string, ParameterName));
+            Assert.Throws<ArgumentNullException>(() => ExceptionUtil.ThrowIfNullOrEmpty(null, ParameterName));
+        }
+
+        [Fact]
+        public void ThrowIfNullOrEmpty_ThrowsIfEmpty()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => ExceptionUtil.ThrowIfNullOrEmpty("", ParameterName));
         }
 
         [Theory]
@@ -104,16 +108,21 @@ namespace alfaNET.Common.Tests.Validation
         }
 
         [Theory]
-        [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
         [InlineData("\t")]
         [InlineData("\r")]
         [InlineData("\n")]
         [InlineData("\r\n")]
-        public void ThrowIfNullOrWhitespace_ThrowsIfSo(string @string)
+        public void ThrowIfNullOrWhitespace_ThrowsIfWhitespace(string @string)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => ExceptionUtil.ThrowIfNullOrWhitespace(@string, ParameterName));
+        }
+
+        [Fact]
+        public void ThrowIfNullOrWhitespace_ThrowsIfNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => ExceptionUtil.ThrowIfNullOrWhitespace(null, ParameterName));
         }
 
         [Theory]

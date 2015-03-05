@@ -16,8 +16,18 @@ using System.Diagnostics;
 
 namespace alfaNET.Common.Logging
 {
+    /// <summary>
+    /// A simple, debug-console, logger
+    /// </summary>
     public class DebugLogger : ILogger
     {
+        /// <summary>
+        /// Logs a message to the current logger.
+        /// </summary>
+        /// <param name="level">The severity of the message.</param>
+        /// <param name="message">The actual message. This may contain tokens.</param>
+        /// <param name="exception">A caught exception for including besides the message. This is optional, it may be null.</param>
+        /// <param name="messageData">A list of objects to replace the optional tokens in the message. This is optional.</param>
         public void Log(LogLevel level, string message, Exception exception = null, params object[] messageData)
         {
             var line = level + " ";

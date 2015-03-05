@@ -19,6 +19,9 @@ using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.NetFx.Storage
 {
+    /// <summary>
+    /// A file system adapter for local file system
+    /// </summary>
     public class FileSystemAdapter : IFileSystem
     {
         public DateTime GetFileLastWriteTime(string fullPath)

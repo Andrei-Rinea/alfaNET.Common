@@ -13,12 +13,34 @@
 // limitations under the License.
 namespace alfaNET.Common.Security
 {
+    /// <summary>
+    /// The result of an authentication request
+    /// </summary>
     public enum AuthenticationResult
     {
+        /// <summary>
+        /// Default member, used for detecting lack of initialization
+        /// </summary>
         Unknown,
+
+        /// <summary>
+        /// The identity was not found in the store.
+        /// </summary>
         UserNotFound,
+
+        /// <summary>
+        /// The authentication is successful, the credentials are correct.
+        /// </summary>
         Successful,
+
+        /// <summary>
+        /// The authentication is unsuccessful because the credentials are wrong. The user was found in the store. Do not, usually, leak this (that the user was found in the store) to the final user.
+        /// </summary>
         WrongCredentials,
+
+        /// <summary>
+        /// The user is temporarily blocked. The user was found in the store, but based on the use policy, because of too many failed authentication requests, the user was blocked for a certain amount of time.
+        /// </summary>
         TemporarilyBlocked
     }
 }

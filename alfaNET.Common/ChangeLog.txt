@@ -1,0 +1,6 @@
+﻿0.7.1.0
+	
+	- Added XML-documentation for all public types and members
+	- Renamed all LockContext-related types and members in order to include "ReaderWriter" as a prefix
+	- Changed ExceptionUtil.ThrowIfNullOrEmpty and ThrowIfNullOrWhitespace to throw ArgumentNullException for null values (previously it throwed ArgumentOutOfRangeException)
+	- Renamed DataException to DataAccessException 

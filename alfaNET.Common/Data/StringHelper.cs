@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+using System;
 using System.IO;
 using System.Text;
 
@@ -18,8 +20,18 @@ using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.Data
 {
+    /// <summary>
+    /// Helper class for converting strings.
+    /// </summary>
     public static class StringHelper
     {
+        /// <summary>
+        /// Converts a string to a stream containing its binary representation in respect to an Encoding.
+        /// </summary>
+        /// <param name="string">The string instance. This may not be null but it may be empty.</param>
+        /// <param name="encoding">The encoding used to convert the string to the binary representation. This may be null, in which case UTF-8 will be assumed.</param>
+        /// <returns>A stream (MemoryStream) containing the binary representation of the string, open, poisitioned at the beginning.</returns>
+        /// <exception cref="ArgumentNullException">In case @string is null</exception>
         public static Stream ToStream(this string @string, Encoding encoding = null)
         {
             ExceptionUtil.ThrowIfNull(@string, "string");

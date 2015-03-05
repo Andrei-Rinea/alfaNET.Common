@@ -39,17 +39,17 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
             _secondThreadReleasedLock = new ManualResetEvent(false);
         }
 
-        private void HoldLock(LockContextType type)
+        private void HoldLock(ReaderWriterLockContextType type)
         {
             switch (type)
             {
-                case LockContextType.Read:
+                case ReaderWriterLockContextType.Reader:
                     _lock.TryEnterReadLock(_timeOut);
                     _secondThreadEnteredLock.Set();
                     _secondThreadShouldReleaseLock.WaitOne();
                     _lock.ExitReadLock();
                     break;
-                case LockContextType.Write:
+                case ReaderWriterLockContextType.Writer:
                     _lock.TryEnterWriteLock(_timeOut);
                     _secondThreadEnteredLock.Set();
                     _secondThreadShouldReleaseLock.WaitOne();
@@ -64,37 +64,37 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
         [Fact]
         public void Constructor_RejectsNullLock()
         {
-            Assert.Throws<ArgumentNullException>(() => new LockContext(null, LockContextType.Read, _timeOut));
+            Assert.Throws<ArgumentNullException>(() => new LockContext(null, ReaderWriterLockContextType.Reader, _timeOut));
         }
 
         [Theory]
-        [InlineData(LockContextType.Undefined)]
+        [InlineData(ReaderWriterLockContextType.Undefined)]
         [InlineData(31)]
         public void Constructor_RejectsBadType(int type)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new LockContext(_lock, (LockContextType)type, _timeOut));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new LockContext(_lock, (ReaderWriterLockContextType)type, _timeOut));
         }
 
         [Fact]
         public void Constructor_RejectsZeroTimeout()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new LockContext(_lock, LockContextType.Read, TimeSpan.Zero));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new LockContext(_lock, ReaderWriterLockContextType.Reader, TimeSpan.Zero));
         }
 
         [Fact]
         public void LockContext_TypeReader_CanEnterWhileAnotherReaderIsOn()
         {
-            _thread = new Thread(() => HoldLock(LockContextType.Read));
+            _thread = new Thread(() => HoldLock(ReaderWriterLockContextType.Reader));
             _thread.Start();
             _secondThreadEnteredLock.WaitOne();
             // ReSharper disable once ObjectCreationAsStatement
-            using (new LockContext(_lock, LockContextType.Read, _timeOut)) { }
+            using (new LockContext(_lock, ReaderWriterLockContextType.Reader, _timeOut)) { }
         }
 
         [Theory]
-        [InlineData(LockContextType.Read)]
-        [InlineData(LockContextType.Write)]
-        public void Constructor_SetsType(LockContextType type)
+        [InlineData(ReaderWriterLockContextType.Reader)]
+        [InlineData(ReaderWriterLockContextType.Writer)]
+        public void Constructor_SetsType(ReaderWriterLockContextType type)
         {
             using (var systemUnderTest = new LockContext(_lock, type, _timeOut))
                 Assert.Equal(type, systemUnderTest.Type);
@@ -103,45 +103,45 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
         [Fact]
         public void LockContext_TypeReader_CannotEnterWhileSomeWriterIsOn()
         {
-            _thread = new Thread(() => HoldLock(LockContextType.Write));
+            _thread = new Thread(() => HoldLock(ReaderWriterLockContextType.Writer));
             _thread.Start();
             _secondThreadEnteredLock.WaitOne();
             // ReSharper disable once ObjectCreationAsStatement
-            Assert.Throws<TimeoutException>(() => new LockContext(_lock, LockContextType.Read, _timeOut));
+            Assert.Throws<TimeoutException>(() => new LockContext(_lock, ReaderWriterLockContextType.Reader, _timeOut));
         }
 
         [Fact]
         public void LockContext_TypeReader_CanEnterAndExit_IfNoOtherLockIsOn()
         {
             // ReSharper disable once ObjectCreationAsStatement
-            using (new LockContext(_lock, LockContextType.Read, _timeOut)) { }
+            using (new LockContext(_lock, ReaderWriterLockContextType.Reader, _timeOut)) { }
         }
 
         [Fact]
         public void LockContext_TypeWriter_CanEnterAndExit_IfNoOtherLockIsOn()
         {
             // ReSharper disable once ObjectCreationAsStatement
-            using (new LockContext(_lock, LockContextType.Write, _timeOut)) { }
+            using (new LockContext(_lock, ReaderWriterLockContextType.Writer, _timeOut)) { }
         }
 
         [Fact]
         public void LockContext_TypeWriter_CannotEnterWhileSomeReaderIsOn()
         {
-            _thread = new Thread(() => HoldLock(LockContextType.Read));
+            _thread = new Thread(() => HoldLock(ReaderWriterLockContextType.Reader));
             _thread.Start();
             _secondThreadEnteredLock.WaitOne();
             // ReSharper disable once ObjectCreationAsStatement
-            Assert.Throws<TimeoutException>(() => new LockContext(_lock, LockContextType.Write, _timeOut));
+            Assert.Throws<TimeoutException>(() => new LockContext(_lock, ReaderWriterLockContextType.Writer, _timeOut));
         }
 
         [Fact]
         public void LockContext_TypeWriter_CannotEnterWhileOtherWriterIsOn()
         {
-            _thread = new Thread(() => HoldLock(LockContextType.Write));
+            _thread = new Thread(() => HoldLock(ReaderWriterLockContextType.Writer));
             _thread.Start();
             _secondThreadEnteredLock.WaitOne();
             // ReSharper disable once ObjectCreationAsStatement
-            Assert.Throws<TimeoutException>(() => new LockContext(_lock, LockContextType.Write, _timeOut));
+            Assert.Throws<TimeoutException>(() => new LockContext(_lock, ReaderWriterLockContextType.Writer, _timeOut));
         }
 
         public void Dispose()

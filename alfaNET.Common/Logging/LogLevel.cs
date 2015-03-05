@@ -13,12 +13,44 @@
 // limitations under the License.
 namespace alfaNET.Common.Logging
 {
+    /// <summary>
+    /// Logging message severity levels
+    /// </summary>
     public enum LogLevel
     {
+        /// <summary>
+        /// Default value used for detecting lack of initialization
+        /// </summary>
         Unknown,
-        Info,
+
+        /// <summary>
+        /// Trace level. Used for tracing performance issues usually.
+        /// </summary>
+        Trace,
+
+        /// <summary>
+        /// Debug level. Used for detecting logical errors usually.
+        /// </summary>
         Debug,
+
+        /// <summary>
+        /// Info level. Used for informational purposes. For example app start.
+        /// </summary>
+        Info,
+
+        /// <summary>
+        /// Warn level. Used for slightly-abnormal situations usually.
+        /// </summary>
         Warn,
-        Error
+
+        /// <summary>
+        /// Error level. Used for runtime errors that do not force the app to shut down.
+        /// </summary>
+        Error,
+
+        /// <summary>
+        /// Fatal level. Used for runtime errors that force the app to shut down.
+        /// </summary>
+        Fatal
     }
 }

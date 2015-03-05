@@ -13,25 +13,16 @@
 // limitations under the License.
 using System;
 
-namespace alfaNET.Common.Storage.Exceptions
+namespace alfaNET.Common.Concurrency
 {
-    public class EntityNotFoundException : DataException
+    /// <summary>
+    /// Contract for reader/writer locking. Allows either n readers either 1 writer at a time. Process boundary.
+    /// </summary>
+    public interface IReaderWriterLockContext : IDisposable
     {
-        public EntityNotFoundException()
-        {
-
-        }
-
-        public EntityNotFoundException(string message)
-            : base(message)
-        {
-
-        }
-
-        public EntityNotFoundException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-
-        }
+        /// <summary>
+        /// Gets the type of the current ReaderWriterLockContext. This is immutable.
+        /// </summary>
+        ReaderWriterLockContextType Type { get; }
     }
 }

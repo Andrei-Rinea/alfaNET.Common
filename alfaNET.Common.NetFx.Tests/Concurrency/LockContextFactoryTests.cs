@@ -36,18 +36,18 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
         }
 
         [Theory]
-        [InlineData(LockContextType.Undefined)]
+        [InlineData(ReaderWriterLockContextType.Undefined)]
         [InlineData(123)]
         public void CreateLockContext_RejectsBadType(int type)
         {
-            var lockContextType = (LockContextType)type;
+            var lockContextType = (ReaderWriterLockContextType)type;
             Assert.Throws<ArgumentOutOfRangeException>(() => _systemUnderTest.CreateLockContext(lockContextType));
         }
 
         [Theory]
-        [InlineData(LockContextType.Read)]
-        [InlineData(LockContextType.Write)]
-        public void CreateLockContext_ReturnsNonNull(LockContextType type)
+        [InlineData(ReaderWriterLockContextType.Reader)]
+        [InlineData(ReaderWriterLockContextType.Writer)]
+        public void CreateLockContext_ReturnsNonNull(ReaderWriterLockContextType type)
         {
             var lockContext = _systemUnderTest.CreateLockContext(type);
             Assert.NotNull(lockContext);
