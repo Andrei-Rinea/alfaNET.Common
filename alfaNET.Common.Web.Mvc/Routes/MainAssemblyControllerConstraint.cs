@@ -23,6 +23,9 @@ using alfaNET.Common.Validation;
 namespace alfaNET.Common.Web.Mvc.Routes
 {
     // TODO : Unit tests
+    /// <summary>
+    /// 
+    /// </summary>
     public class MainAssemblyControllerConstraint : IRouteConstraint
     {
         private const string ControllerRouteValueName = "controller";
@@ -30,6 +33,10 @@ namespace alfaNET.Common.Web.Mvc.Routes
 
         private readonly string[] _controllerNames;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assembly"></param>
         public MainAssemblyControllerConstraint(Assembly assembly)
         {
             ExceptionUtil.ThrowIfNull(assembly, "assembly");
@@ -55,6 +62,15 @@ namespace alfaNET.Common.Web.Mvc.Routes
                 controllerType.IsAssignableFrom(t);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="route"></param>
+        /// <param name="parameterName"></param>
+        /// <param name="values"></param>
+        /// <param name="routeDirection"></param>
+        /// <returns></returns>
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
             if (!values.ContainsKey(ControllerRouteValueName))

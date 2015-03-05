@@ -11,13 +11,24 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+using System;
 using System.Web.Mvc;
 using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.Web.Mvc.Controllers
 {
+    /// <summary>
+    /// Helper class for easing working with ModelStateDictionary
+    /// </summary>
     public static class ModelStateDictionaryExtensions
     {
+        /// <summary>
+        /// Reverse of the IsValid, in order to produce easier to read code
+        /// </summary>
+        /// <param name="modelStateDictionary">The <see cref="System.Web.ModelBinding.ModelStateDictionary"/> instance</param>
+        /// <returns>true if invalid or false if valid</returns>
+        /// <exception cref="ArgumentNullException">In case modelStateDictionary is null</exception>
         public static bool IsInvalid(this ModelStateDictionary modelStateDictionary)
         {
             ExceptionUtil.ThrowIfNull(modelStateDictionary, "modelStateDictionary");

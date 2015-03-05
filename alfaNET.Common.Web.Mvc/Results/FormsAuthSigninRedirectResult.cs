@@ -19,6 +19,9 @@ using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.Web.Mvc.Results
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FormsAuthSigninRedirectResult : ActionResult
     {
         public FormsAuthSigninRedirectResult(string username, DateTime issueDate, bool persistent = true, string userData = "")
@@ -32,11 +35,30 @@ namespace alfaNET.Common.Web.Mvc.Results
             UserData = userData;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Username { get; private set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Persistent { get; private set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public string UserData { get; private set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime IssueDate { get; private set; }
 
+        /// <summary>
+        /// Enables processing of the result of an action method by a custom type that inherits from the <see cref="T:System.Web.Mvc.ActionResult"/> class.
+        /// </summary>
+        /// <param name="context">The context in which the result is executed. The context information includes the controller, HTTP content, request context, and route data.</param>
         public override void ExecuteResult(ControllerContext context)
         {
             ExceptionUtil.ThrowIfNull(context, "context");

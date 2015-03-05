@@ -11,14 +11,25 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System.Web.Hosting;
 
+using System;
+using System.Web.Hosting;
 using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.Web.Mvc.Hosting
 {
+    /// <summary>
+    /// <see cref="IFilePathUtil"/> implementation for System.Web
+    /// </summary>
     public class FilePathUtil : IFilePathUtil
     {
+        /// <summary>
+        /// Maps a relative path (example : "~/App_Data/file1.txt" to an absolute, file-system path (example : "C:\Inetpub\wwwroot\MyApp\App_Data\file1.txt")
+        /// </summary>
+        /// <param name="relativePath">The relative path. This may not be null or whitespace.</param>
+        /// <returns>Absolute, file-system path</returns>
+        /// <exception cref="ArgumentNullException">In case relativePath is null</exception>
+        /// <exception cref="ArgumentOutOfRangeException">In case relativePath is whitespace</exception>
         public string MapPath(string relativePath)
         {
             ExceptionUtil.ThrowIfNullOrWhitespace(relativePath, "relativePath");

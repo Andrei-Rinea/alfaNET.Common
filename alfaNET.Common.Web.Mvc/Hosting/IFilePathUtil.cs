@@ -13,8 +13,16 @@
 // limitations under the License.
 namespace alfaNET.Common.Web.Mvc.Hosting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IFilePathUtil
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="relativePath"></param>
+        /// <returns></returns>
         string MapPath(string relativePath);
     }
 }
