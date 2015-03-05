@@ -11,3 +11,7 @@ alfaNET.Common.NetFx/obj/
 alfaNET.Common.NetFx.Tests/bin/
 *.vspscc
 *.nupkg
+alfaNET.Common.Web.Mvc/bin/
+alfaNET.Common.Web.Mvc/obj/
+alfaNET.Common.Web.Mvc.Tests/bin/
+alfaNET.Common.Web.Mvc.Tests/obj/
