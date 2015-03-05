@@ -5,3 +5,9 @@ alfaNET.Common/bin/
 packages/
 alfaNET.Common.Tests/obj/
 alfaNET.Common.Tests/bin/
+alfaNET.Common.NetFx.Tests/obj/
+alfaNET.Common.NetFx/bin/
+alfaNET.Common.NetFx/obj/
+alfaNET.Common.NetFx.Tests/bin/
+*.vspscc
+*.nupkg
