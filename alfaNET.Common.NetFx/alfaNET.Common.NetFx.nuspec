@@ -2,20 +2,20 @@
 <package >
   <metadata>
     <id>alfaNET.Common.NetFx</id>
-    <version>0.7.0.1</version>
+    <version>0.7.1.0</version>
     <title>alfaNET.Common.NetFx</title>
     <authors>Andrei Rînea</authors>
     <owners>Andrei Rînea</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <!--<projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Common, boiler-plate code</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright © Andrei Rînea 2015</copyright>
     <tags>Common Commons</tags>
     <dependencies>
-      <dependency id="alfaNET.Common" version="0.7.0.1"/>
+      <dependency id="alfaNET.Common" version="0.7.1.0"/>
     </dependencies>
   </metadata>
 </package>
