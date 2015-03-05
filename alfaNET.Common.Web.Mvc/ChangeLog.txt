@@ -1,5 +1,0 @@
-﻿0.7.1.2
-	- Added null checks for Sha512Hasher.Hash
-	- ReaderWriterLockContext made internal
-	- Added fullPath checks for all FileSystemAdapter's methods
-	- InternalsVisibleTo("alfaNET.Common.NetFx.Tests")

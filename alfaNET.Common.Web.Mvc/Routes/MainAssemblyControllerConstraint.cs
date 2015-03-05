@@ -24,7 +24,7 @@ namespace alfaNET.Common.Web.Mvc.Routes
 {
     // TODO : Unit tests
     /// <summary>
-    /// 
+    /// <see cref="IRouteConstraint"/> that forces the controller value to be one of the controllers in the given assembly.
     /// </summary>
     public class MainAssemblyControllerConstraint : IRouteConstraint
     {
@@ -34,13 +34,13 @@ namespace alfaNET.Common.Web.Mvc.Routes
         private readonly string[] _controllerNames;
 
         /// <summary>
-        /// 
+        /// Constructs an instance of <see cref="MainAssemblyControllerConstraint"/>
         /// </summary>
-        /// <param name="assembly"></param>
+        /// <param name="assembly">The assembly to search for valid controllers</param>
+        /// <exception cref="ArgumentNullException">In case assembly is null</exception>
         public MainAssemblyControllerConstraint(Assembly assembly)
         {
             ExceptionUtil.ThrowIfNull(assembly, "assembly");
-
             var types = assembly.GetTypes().Where(IsControllerType);
             _controllerNames = types.Select(GetControllerName).ToArray();
         }
@@ -63,14 +63,12 @@ namespace alfaNET.Common.Web.Mvc.Routes
         }
 
         /// <summary>
-        /// 
+        /// Determines whether the URL parameter contains a valid value for this constraint.
         /// </summary>
-        /// <param name="httpContext"></param>
-        /// <param name="route"></param>
-        /// <param name="parameterName"></param>
-        /// <param name="values"></param>
-        /// <param name="routeDirection"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// true if the URL parameter contains a valid value; otherwise, false.
+        /// </returns>
+        /// <param name="httpContext">An object that encapsulates information about the HTTP request.</param><param name="route">The object that this constraint belongs to.</param><param name="parameterName">The name of the parameter that is being checked.</param><param name="values">An object that contains the parameters for the URL.</param><param name="routeDirection">An object that indicates whether the constraint check is being performed when an incoming request is being handled or when a URL is being generated.</param>
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
             if (!values.ContainsKey(ControllerRouteValueName))

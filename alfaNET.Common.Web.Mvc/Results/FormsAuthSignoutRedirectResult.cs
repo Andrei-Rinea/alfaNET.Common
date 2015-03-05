@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+using System;
 using System.Web.Mvc;
 using System.Web.Security;
 using alfaNET.Common.Validation;
@@ -18,33 +20,35 @@ using alfaNET.Common.Validation;
 namespace alfaNET.Common.Web.Mvc.Results
 {
     /// <summary>
-    /// 
+    /// Forms Authentication sign-out MVC result
     /// </summary>
     public class FormsAuthSignoutRedirectResult : ActionResult
     {
         /// <summary>
-        /// 
+        /// Constructs an instance of <see cref="FormsAuthSignoutRedirectResult"/>
         /// </summary>
-        /// <param name="url"></param>
-        public FormsAuthSignoutRedirectResult(string url = null)
+        /// <param name="redirectUrl">The redirect URL. This may be null.</param>
+        /// <remarks>If the redirect URL is null the execution will try to redirect to the referrer and if that is missing, will redirect to root.</remarks>
+        public FormsAuthSignoutRedirectResult(string redirectUrl = null)
         {
-            Url = url;
+            RedirectUrl = redirectUrl;
         }
 
         /// <summary>
-        /// 
+        /// The post-signout redirect URL
         /// </summary>
-        public string Url { get; private set; }
+        public string RedirectUrl { get; private set; }
 
         /// <summary>
         /// Enables processing of the result of an action method by a custom type that inherits from the <see cref="T:System.Web.Mvc.ActionResult"/> class.
         /// </summary>
         /// <param name="context">The context in which the result is executed. The context information includes the controller, HTTP content, request context, and route data.</param>
+        /// <exception cref="ArgumentNullException">In case context is null</exception>
         public override void ExecuteResult(ControllerContext context)
         {
             ExceptionUtil.ThrowIfNull(context, "context");
 
-            var url = Url;
+            var url = RedirectUrl;
             if (url == null)
             {
                 var referrer = context.RequestContext.HttpContext.Request.UrlReferrer;

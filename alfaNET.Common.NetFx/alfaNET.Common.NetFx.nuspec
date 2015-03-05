@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>alfaNET.Common.NetFx</id>
-    <version>0.7.1.2</version>
+    <version>0.7.1.3</version>
     <title>alfaNET.Common.NetFx</title>
     <authors>Andrei Rînea</authors>
     <owners>Andrei Rînea</owners>
@@ -15,7 +15,7 @@
     <copyright>Copyright © Andrei Rînea 2015</copyright>
     <tags>Common Commons</tags>
     <dependencies>
-      <dependency id="alfaNET.Common" version="0.7.1.0"/>
+      <dependency id="alfaNET.Common" version="0.7.1.1"/>
     </dependencies>
   </metadata>
 </package>
