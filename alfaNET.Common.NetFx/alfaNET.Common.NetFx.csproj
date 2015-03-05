@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concurrency\LockContext.cs" />
-    <Compile Include="Concurrency\LockContextFactory.cs" />
+    <Compile Include="Concurrency\ReaderWriterLockContext.cs" />
+    <Compile Include="Concurrency\ReaderWriterLockContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Sha512Hasher.cs" />
     <Compile Include="Storage\FileSystemAdapter.cs" />

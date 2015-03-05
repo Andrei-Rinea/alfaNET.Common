@@ -69,14 +69,20 @@ namespace alfaNET.Common.NetFx.Tests.Security
         }
 
         [Theory]
+        [InlineData("", Password)]
+        [InlineData(Username, "")]
+        public void Authenticate_RejectsEmptyParameters(string username, string password)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => _dummyAuthenticator.Authenticate(username, password));
+        }
+
+        [Theory]
         [InlineData(null, null)]
         [InlineData(null, Password)]
         [InlineData(Username, null)]
-        [InlineData("", Password)]
-        [InlineData(Username, "")]
-        public void Authenticate_RejectsBadParameters(string username, string password)
+        public void Authenticate_RejectsNullParameters(string username, string password)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _dummyAuthenticator.Authenticate(username, password));
+            Assert.Throws<ArgumentNullException>(() => _dummyAuthenticator.Authenticate(username, password));
         }
 
         private AuthenticationResult GetAuthResult(string username, string password)

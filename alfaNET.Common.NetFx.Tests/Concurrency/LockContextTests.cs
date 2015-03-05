@@ -64,7 +64,7 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
         [Fact]
         public void Constructor_RejectsNullLock()
         {
-            Assert.Throws<ArgumentNullException>(() => new LockContext(null, ReaderWriterLockContextType.Reader, _timeOut));
+            Assert.Throws<ArgumentNullException>(() => new ReaderWriterLockContext(null, ReaderWriterLockContextType.Reader, _timeOut));
         }
 
         [Theory]
@@ -72,13 +72,13 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
         [InlineData(31)]
         public void Constructor_RejectsBadType(int type)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new LockContext(_lock, (ReaderWriterLockContextType)type, _timeOut));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ReaderWriterLockContext(_lock, (ReaderWriterLockContextType)type, _timeOut));
         }
 
         [Fact]
         public void Constructor_RejectsZeroTimeout()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new LockContext(_lock, ReaderWriterLockContextType.Reader, TimeSpan.Zero));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ReaderWriterLockContext(_lock, ReaderWriterLockContextType.Reader, TimeSpan.Zero));
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
             _thread.Start();
             _secondThreadEnteredLock.WaitOne();
             // ReSharper disable once ObjectCreationAsStatement
-            using (new LockContext(_lock, ReaderWriterLockContextType.Reader, _timeOut)) { }
+            using (new ReaderWriterLockContext(_lock, ReaderWriterLockContextType.Reader, _timeOut)) { }
         }
 
         [Theory]
@@ -96,7 +96,7 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
         [InlineData(ReaderWriterLockContextType.Writer)]
         public void Constructor_SetsType(ReaderWriterLockContextType type)
         {
-            using (var systemUnderTest = new LockContext(_lock, type, _timeOut))
+            using (var systemUnderTest = new ReaderWriterLockContext(_lock, type, _timeOut))
                 Assert.Equal(type, systemUnderTest.Type);
         }
 
@@ -107,21 +107,21 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
             _thread.Start();
             _secondThreadEnteredLock.WaitOne();
             // ReSharper disable once ObjectCreationAsStatement
-            Assert.Throws<TimeoutException>(() => new LockContext(_lock, ReaderWriterLockContextType.Reader, _timeOut));
+            Assert.Throws<TimeoutException>(() => new ReaderWriterLockContext(_lock, ReaderWriterLockContextType.Reader, _timeOut));
         }
 
         [Fact]
         public void LockContext_TypeReader_CanEnterAndExit_IfNoOtherLockIsOn()
         {
             // ReSharper disable once ObjectCreationAsStatement
-            using (new LockContext(_lock, ReaderWriterLockContextType.Reader, _timeOut)) { }
+            using (new ReaderWriterLockContext(_lock, ReaderWriterLockContextType.Reader, _timeOut)) { }
         }
 
         [Fact]
         public void LockContext_TypeWriter_CanEnterAndExit_IfNoOtherLockIsOn()
         {
             // ReSharper disable once ObjectCreationAsStatement
-            using (new LockContext(_lock, ReaderWriterLockContextType.Writer, _timeOut)) { }
+            using (new ReaderWriterLockContext(_lock, ReaderWriterLockContextType.Writer, _timeOut)) { }
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
             _thread.Start();
             _secondThreadEnteredLock.WaitOne();
             // ReSharper disable once ObjectCreationAsStatement
-            Assert.Throws<TimeoutException>(() => new LockContext(_lock, ReaderWriterLockContextType.Writer, _timeOut));
+            Assert.Throws<TimeoutException>(() => new ReaderWriterLockContext(_lock, ReaderWriterLockContextType.Writer, _timeOut));
         }
 
         [Fact]
@@ -141,7 +141,7 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
             _thread.Start();
             _secondThreadEnteredLock.WaitOne();
             // ReSharper disable once ObjectCreationAsStatement
-            Assert.Throws<TimeoutException>(() => new LockContext(_lock, ReaderWriterLockContextType.Writer, _timeOut));
+            Assert.Throws<TimeoutException>(() => new ReaderWriterLockContext(_lock, ReaderWriterLockContextType.Writer, _timeOut));
         }
 
         public void Dispose()

@@ -19,13 +19,13 @@ using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.NetFx.Concurrency
 {
-    public class LockContext : ILockContext
+    public class ReaderWriterLockContext : IReaderWriterLockContext
     {
         private readonly ReaderWriterLockSlim _readerWriterLockSlim;
 
-        public LockContext(
+        public ReaderWriterLockContext(
             ReaderWriterLockSlim readerWriterLockSlim,
-            LockContextType type,
+            ReaderWriterLockContextType type,
             TimeSpan timeout)
         {
             ExceptionUtil.ThrowIfNull(readerWriterLockSlim, "readerWriterLockSlim");
@@ -37,10 +37,10 @@ namespace alfaNET.Common.NetFx.Concurrency
             bool acquiredLock;
             switch (type)
             {
-                case LockContextType.Read:
+                case ReaderWriterLockContextType.Reader:
                     acquiredLock = _readerWriterLockSlim.TryEnterReadLock(timeout);
                     break;
-                case LockContextType.Write:
+                case ReaderWriterLockContextType.Writer:
                     acquiredLock = _readerWriterLockSlim.TryEnterWriteLock(timeout);
                     break;
                 default:
@@ -50,16 +50,16 @@ namespace alfaNET.Common.NetFx.Concurrency
             Type = type;
         }
 
-        public LockContextType Type { get; private set; }
+        public ReaderWriterLockContextType Type { get; private set; }
 
         public void Dispose()
         {
             switch (Type)
             {
-                case LockContextType.Read:
+                case ReaderWriterLockContextType.Reader:
                     _readerWriterLockSlim.ExitReadLock();
                     break;
-                case LockContextType.Write:
+                case ReaderWriterLockContextType.Writer:
                     _readerWriterLockSlim.ExitWriteLock();
                     break;
                 default:

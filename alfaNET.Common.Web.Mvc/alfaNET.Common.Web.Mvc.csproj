@@ -43,7 +43,7 @@
     </Reference>
     <Reference Include="alfaNET.Common.NetFx, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\alfaNET.Common.NetFx.0.7.0.1\lib\net40\alfaNET.Common.NetFx.dll</HintPath>
+      <HintPath>..\packages\alfaNET.Common.NetFx.0.7.1.0\lib\net40\alfaNET.Common.NetFx.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>

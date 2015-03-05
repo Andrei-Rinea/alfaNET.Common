@@ -21,18 +21,18 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
 {
     public class LockContextFactoryTests
     {
-        private readonly LockContextFactory _systemUnderTest;
+        private readonly ReaderWriterLockContextFactory _systemUnderTest;
 
         public LockContextFactoryTests()
         {
             var timeOut = TimeSpan.FromSeconds(1);
-            _systemUnderTest = new LockContextFactory(timeOut);
+            _systemUnderTest = new ReaderWriterLockContextFactory(timeOut);
         }
 
         [Fact]
         public void Constructor_RejectsZeroTimeout()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new LockContextFactory(TimeSpan.Zero));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ReaderWriterLockContextFactory(TimeSpan.Zero));
         }
 
         [Theory]
@@ -41,7 +41,7 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
         public void CreateLockContext_RejectsBadType(int type)
         {
             var lockContextType = (ReaderWriterLockContextType)type;
-            Assert.Throws<ArgumentOutOfRangeException>(() => _systemUnderTest.CreateLockContext(lockContextType));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _systemUnderTest.CreateReaderWriterLockContext(lockContextType));
         }
 
         [Theory]
@@ -49,7 +49,7 @@ namespace alfaNET.Common.NetFx.Tests.Concurrency
         [InlineData(ReaderWriterLockContextType.Writer)]
         public void CreateLockContext_ReturnsNonNull(ReaderWriterLockContextType type)
         {
-            var lockContext = _systemUnderTest.CreateLockContext(type);
+            var lockContext = _systemUnderTest.CreateReaderWriterLockContext(type);
             Assert.NotNull(lockContext);
         }
     }

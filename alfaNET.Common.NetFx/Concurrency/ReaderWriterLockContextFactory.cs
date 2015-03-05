@@ -19,12 +19,12 @@ using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.NetFx.Concurrency
 {
-    public class LockContextFactory : ILockContextFactory
+    public class ReaderWriterLockContextFactory : IReaderWriterLockContextFactory
     {
         private readonly ReaderWriterLockSlim _readerWriterLockSlim;
         private readonly TimeSpan _timeout;
 
-        public LockContextFactory(TimeSpan timeout)
+        public ReaderWriterLockContextFactory(TimeSpan timeout)
         {
             ExceptionUtil.ThrowIfDefault(timeout, "timeout");
 
@@ -32,11 +32,11 @@ namespace alfaNET.Common.NetFx.Concurrency
             _timeout = timeout;
         }
 
-        public ILockContext CreateLockContext(LockContextType type)
+        public IReaderWriterLockContext CreateReaderWriterLockContext(ReaderWriterLockContextType type)
         {
             ExceptionUtil.ThrowIfDefaultOrUndefined(type, "type");
 
-            return new LockContext(_readerWriterLockSlim, type, _timeout);
+            return new ReaderWriterLockContext(_readerWriterLockSlim, type, _timeout);
         }
 
         public void Dispose()
