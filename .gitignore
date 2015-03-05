@@ -1,0 +1,7 @@
+alfaNET.Common/obj/
+*.suo
+alfaNET.Common/bin/
+*.user
+packages/
+alfaNET.Common.Tests/obj/
+alfaNET.Common.Tests/bin/

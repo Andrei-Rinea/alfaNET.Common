@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>alfaNET.Common</id>
-    <version>0.7.0.0</version>
+    <version>0.7.0.1</version>
     <title>alfaNET.Common</title>
     <authors>Andrei Rînea</authors>
     <owners>Andrei Rînea</owners>
@@ -15,4 +15,7 @@
     <copyright>Copyright Andrei Rînea 2015</copyright>
     <tags>Portable Commons Common</tags>
   </metadata>
+  <!--<files>
+    <file src="**\*.cs" target="src"/>
+  </files>-->
 </package>
