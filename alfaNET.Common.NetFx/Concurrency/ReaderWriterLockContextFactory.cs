@@ -19,11 +19,18 @@ using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.NetFx.Concurrency
 {
+    /// <summary>
+    /// <see cref="IReaderWriterLockContextFactory"/> implementation for .NET Full Profile using ReaderWriterLockSlim
+    /// </summary>
     public class ReaderWriterLockContextFactory : IReaderWriterLockContextFactory
     {
         private readonly ReaderWriterLockSlim _readerWriterLockSlim;
         private readonly TimeSpan _timeout;
 
+        /// <summary>
+        /// Constructs a new <see cref="ReaderWriterLockContextFactory"/>
+        /// </summary>
+        /// <param name="timeout">Timeout for <see cref="ReaderWriterLockContext"/> instances</param>
         public ReaderWriterLockContextFactory(TimeSpan timeout)
         {
             ExceptionUtil.ThrowIfDefault(timeout, "timeout");
@@ -32,6 +39,12 @@ namespace alfaNET.Common.NetFx.Concurrency
             _timeout = timeout;
         }
 
+        /// <summary>
+        /// Creates an instance of an implementation of <see cref="IReaderWriterLockContext"/>
+        /// </summary>
+        /// <param name="type">The lock context type</param>
+        /// <returns>an instance of an implementation of <see cref="IReaderWriterLockContext"/></returns>
+        /// <exception cref="ArgumentOutOfRangeException">In case lock context type is undefined</exception>
         public IReaderWriterLockContext CreateReaderWriterLockContext(ReaderWriterLockContextType type)
         {
             ExceptionUtil.ThrowIfDefaultOrUndefined(type, "type");
@@ -39,6 +52,9 @@ namespace alfaNET.Common.NetFx.Concurrency
             return new ReaderWriterLockContext(_readerWriterLockSlim, type, _timeout);
         }
 
+        /// <summary>
+        /// Disposes of ((in)directly) unmanaged resources
+        /// </summary>
         public void Dispose()
         {
             if (_readerWriterLockSlim != null)

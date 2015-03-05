@@ -19,7 +19,7 @@ using alfaNET.Common.Validation;
 
 namespace alfaNET.Common.NetFx.Concurrency
 {
-    public class ReaderWriterLockContext : IReaderWriterLockContext
+    internal class ReaderWriterLockContext : IReaderWriterLockContext
     {
         private readonly ReaderWriterLockSlim _readerWriterLockSlim;
 
